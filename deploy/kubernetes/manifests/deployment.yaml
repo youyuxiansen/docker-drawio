@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,7 +15,7 @@ spec:
         app: draw.io
     spec:
       containers:
-        - image: index.docker.io/jgraph/drawio
+        - image: docker.io/fjudith/draw.io
           imagePullPolicy: IfNotPresent
           name: drawio
           resources:

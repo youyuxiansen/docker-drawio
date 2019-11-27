@@ -1,6 +1,6 @@
 FROM tomcat:9-jre11-slim
 
-LABEL maintainer="JGraph Ltd"
+LABEL maintainer="Florian JUDITH <florian.judith.b@gmail.com>"
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
