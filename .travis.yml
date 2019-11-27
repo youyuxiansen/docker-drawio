@@ -1,7 +1,7 @@
 env:
   global:
   # Docker Repository
-  - REPO=fjudith/draw.io
+  - REPO=jgraph/drawio
   # Compute docker tag
   - TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
   - ALPINE_TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "alpine"; else echo $TRAVIS_BRANCH-alpine ; fi`
@@ -52,5 +52,4 @@ jobs:
       - docker tag ${REPO}:${VERSION}-${BASE_IMAGE} ${REPO}:${ALPINE_TAG}
       - docker push ${REPO}:${ALPINE_TAG}
       - docker push ${REPO}:${VERSION}-${BASE_IMAGE}
-
-      # - curl -X POST https://hooks.microbadger.com/images/jgraph/drawio/L1HSeb1zjYXdXe4RIVlHXSkT6Ng=
+      - curl -X POST https://hooks.microbadger.com/images/jgraph/drawio/L1HSeb1zjYXdXe4RIVlHXSkT6Ng=
