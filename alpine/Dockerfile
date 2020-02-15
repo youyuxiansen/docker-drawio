@@ -22,6 +22,7 @@ RUN apk update --no-cache && \
 
 COPY --from=build /tmp/drawio/build/draw.war /tmp
 
+# Extract draw.io war & Update server.xml to set Draw.io webapp to root
 RUN mkdir -p $CATALINA_HOME/webapps/draw && \
     unzip /tmp/draw.war -d $CATALINA_HOME/webapps/draw && \
     rm -rf /tmp/draw.war /tmp/drawio && \
@@ -38,8 +39,11 @@ RUN mkdir -p $CATALINA_HOME/webapps/draw && \
         -s '/Server/Service/Engine/Host/Context[@path="/ROOT"]' -t 'elem' -n 'WatchedResource' -v 'WEB-INF/web.xml' \
         conf/server.xml
 
-COPY docker-entrypoint.sh /
+# Copy draw.io config files
 COPY PreConfig.js PostConfig.js $CATALINA_HOME/webapps/draw/js/
+# Copy docker-entrypoint
+COPY docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
 
 WORKDIR $CATALINA_HOME
 
