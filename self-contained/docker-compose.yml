@@ -16,6 +16,8 @@ services:
       - drawionet
     volumes:
       - ./fonts:/usr/share/fonts/drawio
+    environment:
+      - DRAWIO_SERVER_URL=http://drawio:8080
   drawio:
     image: jgraph/drawio
     ports:
