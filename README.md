@@ -3,16 +3,16 @@
 
 ## Introduction
 
-[draw.io](https://github.com/jgraph/drawio) (formerly Diagramly) is free online diagram software. You can use it as a flowchart maker, network diagram software, to create UML online, as an ER diagram tool, to design database schema, to build BPMN online, as a circuit diagram maker, and more. draw.io can import .vsdx, Gliffy™ and Lucidchart™ files.
+[diagrams.net](https://github.com/jgraph/drawio) (formerly draw.io) is free online diagram software. You can use it as a flowchart maker, network diagram software, to create UML online, as an ER diagram tool, to design database schema, to build BPMN online, as a circuit diagram maker, and more. draw.io can import .vsdx, Gliffy™ and Lucidchart™ files.
 
 In this repository:
 
-* draw.io docker image that is always up-to-date with draw.io releases
-* draw.io export server image which allow exporting draw.io diagrams to pdf and images
-* docker-compose to run draw.io with the export server
-* docker-compose to run draw.io integrated within nextcloud
-* docker-compose to run draw.io with PlantUML support
-* docker-compose to run draw.io self-contained without any dependency on draw.io website (with the export server, plantUml, Google Drive support, OneDrive support, and EMF conversion support (for VSDX export)
+* diagrams.net docker image that is always up-to-date with diagrams.net releases
+* diagrams.net export server image which allow exporting diagrams.net diagrams to pdf and images
+* docker-compose to run diagrams.net with the export server
+* docker-compose to run diagrams.net integrated within nextcloud
+* docker-compose to run diagrams.net with PlantUML support
+* docker-compose to run diagrams.net self-contained without any dependency on diagrams.net website (with the export server, plantUml, Google Drive support, OneDrive support, and EMF conversion support (for VSDX export)
 
 ## Description
 
@@ -66,7 +66,7 @@ If you're running `Docker Toolbox` then start a web browser session to <http://1
 `docker run -it -m1g -e LETS_ENCRYPT_ENABLED=true -e PUBLIC_DNS=drawio.example.com --rm --name="draw" -p 80:80 -p 443:8443 jgraph/drawio`
 Notice that mapping port 80 to container's port 80 allows certbot to work in stand-alone mode. Mapping port 443 to container's port 8443 allows the container tomcat to serve https requests directly.
 
-## Changing draw.io configuration
+## Changing diagrams.net configuration
 
 ### Method 1 (Build you custom image with setting pre-loaded)
 
@@ -96,4 +96,4 @@ docker run -it  --rm --name="draw" --mount type=bind,source="$(pwd)"/PreConfig.j
 
 ## Reference
 
-* <https://github.com/jgraph/draw.io>
+* <https://github.com/jgraph/drawio>
