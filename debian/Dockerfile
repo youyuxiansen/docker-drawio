@@ -45,8 +45,6 @@ RUN mkdir -p $CATALINA_HOME/webapps/draw && \
         -s '/Server/Service/Engine/Host/Context[@path="/ROOT"]' -t 'elem' -n 'WatchedResource' -v 'WEB-INF/web.xml' \
         conf/server.xml
 
-# Copy draw.io config files
-COPY PreConfig.js PostConfig.js $CATALINA_HOME/webapps/draw/js/
 # Copy docker-entrypoint
 COPY docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh

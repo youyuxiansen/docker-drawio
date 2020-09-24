@@ -7,7 +7,7 @@ services:
     networks:
       - drawionet
     volumes:
-      - ./fonts:/usr/share/fonts/drawio
+      - fonts_volume:/usr/share/fonts/drawio
   image-export:
     image: jgraph/export-server
     expose:
@@ -15,7 +15,7 @@ services:
     networks:
       - drawionet
     volumes:
-      - ./fonts:/usr/share/fonts/drawio
+      - fonts_volume:/usr/share/fonts/drawio
     environment:
       - DRAWIO_SERVER_URL=http://drawio:8080
   drawio:
@@ -28,18 +28,12 @@ services:
       - image-export
     networks:
       - drawionet
-    volumes:
-      - ./config/PostConfig.js:/usr/local/tomcat/webapps/draw/js/PostConfig.js
-      - ./config/PreConfig.js:/usr/local/tomcat/webapps/draw/js/PreConfig.js
-      - ./config/cloud_convert_api_key:/usr/local/tomcat/webapps/draw/WEB-INF/cloud_convert_api_key
-      - ./config/google_client_id:/usr/local/tomcat/webapps/draw/WEB-INF/google_client_id
-      - ./config/google_client_redirect_uri:/usr/local/tomcat/webapps/draw/WEB-INF/google_client_redirect_uri
-      - ./config/google_client_secret:/usr/local/tomcat/webapps/draw/WEB-INF/google_client_secret
-      - ./config/msgraph_client_id:/usr/local/tomcat/webapps/draw/WEB-INF/msgraph_client_id
-      - ./config/msgraph_client_redirect_uri:/usr/local/tomcat/webapps/draw/WEB-INF/msgraph_client_redirect_uri
-      - ./config/msgraph_client_secret:/usr/local/tomcat/webapps/draw/WEB-INF/msgraph_client_secret
     environment:
+      - DRAWIO_SELF_CONTAINED=1
       - PLANTUML_URL=http://plantuml-server:8080/
       - EXPORT_URL=http://image-export:8000/
 networks:
   drawionet:
+
+volumes:
+  fonts_volume:
