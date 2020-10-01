@@ -34,7 +34,19 @@ echo "window.DRAWIO_VIEWER_URL = '${DRAWIO_VIEWER_URL}';" >> $CATALINA_HOME/weba
 echo "window.DRAW_MATH_URL = 'math';" >> $CATALINA_HOME/webapps/draw/js/PreConfig.js
 #Custom draw.io configurations. For more details, https://desk.draw.io/support/solutions/articles/16000058316
 echo "window.DRAWIO_CONFIG = ${DRAWIO_CONFIG:-null};" >> $CATALINA_HOME/webapps/draw/js/PreConfig.js
-echo "urlParams['sync'] = 'manual'; //Disable Real-Time" >> $CATALINA_HOME/webapps/draw/js/PreConfig.js
+#Real-time configuration
+if [[ "${DRAWIO_IOT_ENDPOINT}" ]]; then
+    echo "urlParams['sync'] = 'auto'; //Enable Real-Time" >> $CATALINA_HOME/webapps/draw/js/PreConfig.js
+    echo "window.MXPUSHER_IOT_ENDPOINNT = '${DRAWIO_MXPUSHER_ENDPOINT}'; //Specifies the IoT endpoint" >> $CATALINA_HOME/webapps/draw/js/PreConfig.js
+    echo "window.DRAWIO_PUSHER_MODE = 2;" >> $CATALINA_HOME/webapps/draw/js/PreConfig.js
+    mkdir -p $CATALINA_HOME/webapps/draw/WEB-INF/aws_iot_auth
+    echo -n "${DRAWIO_IOT_CERT_PEM}" > $CATALINA_HOME/webapps/draw/WEB-INF/aws_iot_auth/mxPusherSrv.cert.pem
+    echo -n "${DRAWIO_IOT_PRIVATE_KEY}" > $CATALINA_HOME/webapps/draw/WEB-INF/aws_iot_auth/mxPusherSrv.private.key
+    echo -n "${DRAWIO_IOT_ROOT_CA}" > $CATALINA_HOME/webapps/draw/WEB-INF/aws_iot_auth/root-CA.crt
+ 	echo -n "${DRAWIO_IOT_ENDPOINT}" > $CATALINA_HOME/webapps/draw/WEB-INF/aws_iot_auth/endpoint_url
+else
+    echo "urlParams['sync'] = 'manual'; //Disable Real-Time" >> $CATALINA_HOME/webapps/draw/js/PreConfig.js
+fi
 
 #Disable unsupported services
 echo "urlParams['db'] = '0'; //dropbox" >> $CATALINA_HOME/webapps/draw/js/PreConfig.js
