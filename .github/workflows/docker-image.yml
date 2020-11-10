@@ -1,0 +1,35 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build-debian:
+
+    runs-on: ubuntu-latest
+    env:
+      REPO: jgraph/drawio
+      BASE_IMAGE: debian
+      HTTP_PORT: 32733
+      HTTPS_PORT: 32734
+      TRAVIS_BRANCH: ${{ github.head_ref }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: |
+        echo "::set-env name=TRAVIS_BRANCH::${TRAVIS_BRANCH:-$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')}" 
+        # Get draw.io current latest version
+        wget https://raw.githubusercontent.com/jgraph/drawio/master/VERSION
+        export VERSION=`cat VERSION`
+        # Compute docker tag again if this branch is the latest
+        export TAG=`if [ "$TRAVIS_BRANCH" == "v${VERSION}" ]; then echo "latest"; else echo $TAG ; fi`
+        export ALPINE_TAG=`if [ "$TRAVIS_BRANCH" == "v${VERSION}" ]; then echo "alpine"; else echo $ALPINE_TAG ; fi` 
+        docker build -f ${BASE_IMAGE}/Dockerfile -t ${REPO}:${VERSION} ${BASE_IMAGE}/
+        docker run --name 'drawio' -d -p ${HTTP_PORT}:8080 -p ${HTTPS_PORT}:8443 ${REPO}:${VERSION}
+        sleep 10
+        docker logs drawio
+        docker exec drawio /bin/bash -c "curl -i http://localhost:8080"
