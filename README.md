@@ -1,5 +1,5 @@
 [![](https://images.microbadger.com/badges/version/jgraph/drawio.svg)](https://microbadger.com/images/jgraph/drawio "Get your own version badge on microbadger.com")
-[![Build Status](https://travis-ci.com/jgraph/docker-drawio.svg?branch=master)](https://travis-ci.com/jgraph/docker-drawio)
+[![Build Status](https://github.com/jgraph/docker-drawio/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/jgraph/docker-drawio/actions)
 
 ## Introduction
 
