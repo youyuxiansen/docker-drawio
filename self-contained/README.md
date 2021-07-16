@@ -40,6 +40,7 @@ Set the client ID and secret into environment variables `DRAWIO_MSGRAPH_CLIENT_I
 Set the following environment variables to enable Gitlab integration.
 
 * `DRAWIO_GITLAB_ID`: Your Gitlab ID
+* `DRAWIO_GITLAB_SECRET`: Your Gitlab Secret
 * `DRAWIO_GITLAB_URL`: Your Gitlab URL
 
 ## EMF Converter
