@@ -41,4 +41,3 @@ jobs:
         docker tag ${REPO}:${VERSION}${POSTFIX} ${REPO}:$TAG;
         docker push ${REPO}:${TAG};
         docker push ${REPO}:${VERSION}${POSTFIX};
-        curl -X POST https://hooks.microbadger.com/images/jgraph/drawio/L1HSeb1zjYXdXe4RIVlHXSkT6Ng=
