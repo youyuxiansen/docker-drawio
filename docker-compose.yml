@@ -1,4 +1,4 @@
-#This compose file adds Draw.io https://draw.io to your stack
+#This compose file adds diagrams.net (ex draw.io) to your stack
 version: '3.5'
 services:
   drawio:
