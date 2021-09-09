@@ -6,6 +6,8 @@ on:
       - master
     tags:
       - 'v*'
+    schedule:
+      - cron: "05 14 * * *"
 
 jobs:
   build:
