@@ -1,11 +1,9 @@
 name: Docker image-export CI
 
 on:
-  push:
-    branches:
-      - master
-    schedule:
-      - cron: "05 04 * * 1"
+  push
+  schedule:
+    - cron: "05 04 * * 1"
 
 jobs:
   build:
