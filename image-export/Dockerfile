@@ -4,7 +4,7 @@ LABEL maintainer="JGraph Ltd"
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
-        git software-properties-common chromium libatk-bridge2.0-0 libgtk-3-0 && \
+        git curl software-properties-common chromium libatk-bridge2.0-0 libgtk-3-0 && \
     apt-add-repository contrib && \
     apt-get update -y && \
     apt-get install -y --no-install-recommends \
