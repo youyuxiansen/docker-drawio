@@ -1,10 +1,10 @@
-FROM node
+FROM node:slim
 
 LABEL maintainer="JGraph Ltd"
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
-        software-properties-common chromium libatk-bridge2.0-0 libgtk-3-0 && \
+        git software-properties-common chromium libatk-bridge2.0-0 libgtk-3-0 && \
     apt-add-repository contrib && \
     apt-get update -y && \
     apt-get install -y --no-install-recommends \
@@ -14,7 +14,7 @@ RUN apt-get update -y && \
     git clone https://github.com/jgraph/draw-image-export2.git && \
     cd draw-image-export2 && \
     npm install && \
-    apt-get remove -y --purge chromium
+    apt-get remove -y --purge chromium git
     
 WORKDIR /usr/local/drawio/draw-image-export2
 

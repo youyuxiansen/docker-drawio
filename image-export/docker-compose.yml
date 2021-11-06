@@ -8,6 +8,8 @@ services:
       - drawionet
     volumes:
       - ./fonts:/usr/share/fonts/drawio
+    environment:
+      - DRAWIO_SERVER_URL=${DRAWIO_BASE_URL}
   drawio:
     image: jgraph/drawio
     ports:
@@ -19,5 +21,6 @@ services:
       - drawionet
     environment:
       - EXPORT_URL=http://image-export:8000/
+      - DRAWIO_BASE_URL=${DRAWIO_BASE_URL}
 networks:
   drawionet:
