@@ -2,20 +2,20 @@
 
 ## Introduction
 
-[diagrams.net](https://github.com/jgraph/drawio) (formerly draw.io) is free online diagram software. You can use it as a flowchart maker, network diagram software, to create UML online, as an ER diagram tool, to design database schema, to build BPMN online, as a circuit diagram maker, and more. diagrams.net can import .vsdx, Gliffy™ and Lucidchart™ files.
+[draw.io](https://github.com/jgraph/drawio) is an open source whiteboarding / diagramming software application. This project contains various docker implementations of draw.io and associated tools:
 
-In this repository:
-
-* diagrams.net docker image that is always up-to-date with diagrams.net releases
-* diagrams.net export server image which allow exporting diagrams.net diagrams to pdf and images
-* docker-compose to run diagrams.net with the export server
-* docker-compose to run diagrams.net integrated within nextcloud
-* docker-compose to run diagrams.net with PlantUML support
-* docker-compose to run diagrams.net self-contained without any dependency on diagrams.net website (with the export server, plantUml, Google Drive support, OneDrive support, and EMF conversion support (for VSDX export)
+* draw.io docker image that is always up-to-date with draw.io releases
+* draw.io export server image which allow exporting draw.io diagrams to pdf and images
+* docker-compose to run draw.io with the export server
+* docker-compose to run draw.io integrated within nextcloud
+* docker-compose to run draw.io with PlantUML support
+* docker-compose to run draw.io self-contained without any dependency on diagrams.net website (with the export server, plantUml, Google Drive support, OneDrive support, and EMF conversion support (for VSDX export)
 
 ## Description
 
-The Dockerfile builds from `tomcat:9-jre11-slim` and `tomcat:9-jre8-alpine` (see <https://hub.docker.com/_/tomcat/>)
+The Dockerfile builds from `tomcat:9-jre11` and `tomcat:9-jre8-alpine` (see <https://hub.docker.com/_/tomcat/>)
+
+**Note: Version 16.0.0 changed from -slim to the standard Tomcat 9 and JRE 11 image, the major version number change indicating it's a breaking change.**
 
 Forked from [fjudith/draw.io](https://github.com/fjudith/docker-draw.io)
 
