@@ -6,7 +6,7 @@ RUN apk update --no-cache && \
         git
 
 RUN cd /tmp && \
-    git clone https://github.com/jgraph/drawio.git && \
+    git clone --depth 1 https://github.com/jgraph/drawio.git && \
     cd /tmp/drawio/etc/build/ && \
     ant war
 
@@ -33,10 +33,6 @@ RUN mkdir -p $CATALINA_HOME/webapps/draw && \
         -i '/Server/Service/Engine/Host/Context' -t 'attr' -n 'path' -v '/' \
         -i '/Server/Service/Engine/Host/Context[@path="/"]' -t 'attr' -n 'docBase' -v 'draw' \
         -s '/Server/Service/Engine/Host/Context[@path="/"]' -t 'elem' -n 'WatchedResource' -v 'WEB-INF/web.xml' \
-        -i '/Server/Service/Engine/Host/Valve' -t 'elem' -n 'Context' \
-        -i '/Server/Service/Engine/Host/Context[not(@path="/")]' -t 'attr' -n 'path' -v '/ROOT' \
-        -s '/Server/Service/Engine/Host/Context[@path="/ROOT"]' -t 'attr' -n 'docBase' -v 'ROOT' \
-        -s '/Server/Service/Engine/Host/Context[@path="/ROOT"]' -t 'elem' -n 'WatchedResource' -v 'WEB-INF/web.xml' \
         conf/server.xml
 
 # Copy docker-entrypoint

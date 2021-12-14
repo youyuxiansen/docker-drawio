@@ -9,7 +9,7 @@ RUN apt-get update -y && \
         git
 
 RUN cd /tmp && \
-    git clone https://github.com/jgraph/drawio.git && \
+    git clone --depth 1 https://github.com/jgraph/drawio.git && \
     cd /tmp/drawio/etc/build/ && \
     ant war
 
