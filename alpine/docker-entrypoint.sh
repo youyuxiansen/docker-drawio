@@ -60,14 +60,12 @@ else
     #Google drive application id and client id for the editor
     echo "window.DRAWIO_GOOGLE_APP_ID = '${DRAWIO_GOOGLE_APP_ID}'; " >> $CATALINA_HOME/webapps/draw/js/PreConfig.js
     echo "window.DRAWIO_GOOGLE_CLIENT_ID = '${DRAWIO_GOOGLE_CLIENT_ID}'; " >> $CATALINA_HOME/webapps/draw/js/PreConfig.js
-    echo -n "${DRAWIO_GOOGLE_CLIENT_ID}" > $CATALINA_HOME/webapps/draw/WEB-INF/google_client_id
-    echo -n "${DRAWIO_GOOGLE_CLIENT_SECRET}" > $CATALINA_HOME/webapps/draw/WEB-INF/google_client_secret
     #If you want to use the editor as a viewer also, you can create another app with read-only access. You can use the same info as above if write-access is not an issue. 
     if [[ "${DRAWIO_GOOGLE_VIEWER_CLIENT_ID}" ]]; then
         echo "window.DRAWIO_GOOGLE_VIEWER_APP_ID = '${DRAWIO_GOOGLE_VIEWER_APP_ID}'; " >> $CATALINA_HOME/webapps/draw/js/PreConfig.js
         echo "window.DRAWIO_GOOGLE_VIEWER_CLIENT_ID = '${DRAWIO_GOOGLE_VIEWER_CLIENT_ID}'; " >> $CATALINA_HOME/webapps/draw/js/PreConfig.js
-        echo -n "/:::/${DRAWIO_GOOGLE_VIEWER_CLIENT_ID}" >> $CATALINA_HOME/webapps/draw/WEB-INF/google_client_id
-        echo -n "/:::/${DRAWIO_GOOGLE_VIEWER_CLIENT_SECRET}" >> $CATALINA_HOME/webapps/draw/WEB-INF/google_client_secret
+        export DRAWIO_GOOGLE_CLIENT_ID=${DRAWIO_GOOGLE_CLIENT_ID}/:::/${DRAWIO_GOOGLE_VIEWER_CLIENT_ID}
+        export DRAWIO_GOOGLE_CLIENT_SECRET=${DRAWIO_GOOGLE_CLIENT_SECRET}/:::/${DRAWIO_GOOGLE_VIEWER_CLIENT_SECRET}
     fi
 fi
 
@@ -77,8 +75,6 @@ if [[ -z "${DRAWIO_MSGRAPH_CLIENT_ID}" ]]; then
 else
     #Google drive application id and client id for the editor
     echo "window.DRAWIO_MSGRAPH_CLIENT_ID = '${DRAWIO_MSGRAPH_CLIENT_ID}'; " >> $CATALINA_HOME/webapps/draw/js/PreConfig.js
-    echo -n "${DRAWIO_MSGRAPH_CLIENT_ID}" > $CATALINA_HOME/webapps/draw/WEB-INF/msgraph_client_id
-    echo -n "${DRAWIO_MSGRAPH_CLIENT_SECRET}" > $CATALINA_HOME/webapps/draw/WEB-INF/msgraph_client_secret
 fi
 
 #Gitlab
@@ -88,11 +84,6 @@ else
     #Gitlab url and id for the editor
     echo "window.DRAWIO_GITLAB_URL = '${DRAWIO_GITLAB_URL}'; " >> $CATALINA_HOME/webapps/draw/js/PreConfig.js
     echo "window.DRAWIO_GITLAB_ID = '${DRAWIO_GITLAB_ID}'; " >> $CATALINA_HOME/webapps/draw/js/PreConfig.js
-
-    #Gitlab server flow auth (since 14.6.7)
-    echo -n "${DRAWIO_GITLAB_URL}/oauth/token" > $CATALINA_HOME/webapps/draw/WEB-INF/gitlab_auth_url
-    echo -n "${DRAWIO_GITLAB_ID}" > $CATALINA_HOME/webapps/draw/WEB-INF/gitlab_client_id
-    echo -n "${DRAWIO_GITLAB_SECRET}" > $CATALINA_HOME/webapps/draw/WEB-INF/gitlab_client_secret
 fi
 
 cat $CATALINA_HOME/webapps/draw/js/PreConfig.js
@@ -109,7 +100,6 @@ if [[ -z "${DRAWIO_CLOUD_CONVERT_APIKEY}" ]]; then
     echo "window.EMF_CONVERT_URL = null;"  >> $CATALINA_HOME/webapps/draw/js/PostConfig.js
 else
     echo "window.EMF_CONVERT_URL = '/convert';" >> $CATALINA_HOME/webapps/draw/js/PostConfig.js
-    echo -n "${DRAWIO_CLOUD_CONVERT_APIKEY}" > $CATALINA_HOME/webapps/draw/WEB-INF/cloud_convert_api_key
 fi
 
 if [[ "${DRAWIO_SELF_CONTAINED}" ]]; then
