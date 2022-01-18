@@ -30,7 +30,9 @@ jobs:
         wget https://raw.githubusercontent.com/jgraph/drawio/master/VERSION
         export VERSION=`cat VERSION`
         export POSTFIX=`if [ "$BASE_IMAGE" == "debian" ]; then echo ""; else echo "-${BASE_IMAGE}" ; fi`
-        docker build -f ${BASE_IMAGE}/Dockerfile -t ${REPO}:${VERSION}${POSTFIX} ${BASE_IMAGE}/
+        #Alpine multi-platform fails to build
+        export PLATFORM_BUILD=`if [ "$BASE_IMAGE" == "debian" ]; then echo "buildx build --platform linux/amd64,linux/arm64"; else echo "build" ; fi`
+        docker ${PLATFORM_BUILD} -f ${BASE_IMAGE}/Dockerfile -t ${REPO}:${VERSION}${POSTFIX} ${BASE_IMAGE}/
         docker run --name "drawio${POSTFIX}" -d -p ${HTTP_PORT}:8080 -p ${HTTPS_PORT}:8443 ${REPO}:${VERSION}${POSTFIX}
         sleep 10
         docker logs drawio${POSTFIX}
