@@ -1,4 +1,7 @@
-[![Build Status](https://github.com/jgraph/docker-drawio/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/jgraph/docker-drawio/actions)
+[![Build Status](https://github.com/jgraph/docker-drawio/workflows/Debian%20Docker%20Image%20CI/badge.svg)](https://github.com/jgraph/docker-drawio/actions)
+[![Build Status](https://github.com/jgraph/docker-drawio/workflows/Alpine%20Docker%20Image%20CI/badge.svg)](https://github.com/jgraph/docker-drawio/actions)
+[![Build Status](https://github.com/jgraph/docker-drawio/workflows/Docker%20image-export%20CI/badge.svg)](https://github.com/jgraph/docker-drawio/actions)
+
 
 ## Introduction
 
