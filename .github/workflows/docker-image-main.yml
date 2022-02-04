@@ -1,4 +1,4 @@
-name: Debian Docker Image CI
+name: Docker Image CI
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
     - uses: actions/checkout@v2
-    - name: Build debian Docker image
+    - name: Build Docker image
       run: |
         # Get draw.io current latest version
         wget https://raw.githubusercontent.com/jgraph/drawio/master/VERSION
@@ -32,7 +32,7 @@ jobs:
         echo "${DOCKER_PASS}" | docker login -u "${DOCKER_USER}" --password-stdin;
         export GIT_BRANCH=`echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }'`
         export TAG=`if [ "$GIT_BRANCH" == "v${VERSION}" ] || [ "$GIT_BRANCH" == "master" ]; then echo "latest"; else echo $GIT_BRANCH ; fi`
-        docker buildx build --platform linux/amd64,linux/arm64 -f debian/Dockerfile -t ${REPO}:${VERSION} -t ${REPO}:$TAG --push debian/
+        docker buildx build --platform linux/amd64,linux/arm64 -f main/Dockerfile -t ${REPO}:${VERSION} -t ${REPO}:$TAG --push main/
         #With platform build, the images are not stored locally, so we test the image after pushing it
         docker run --name "drawio" -d -p ${HTTP_PORT}:8080 -p ${HTTPS_PORT}:8443 ${REPO}:${VERSION}
         sleep 10

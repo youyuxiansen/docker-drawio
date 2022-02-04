@@ -13,7 +13,7 @@ RUN cd /tmp && \
     cd /tmp/drawio/etc/build/ && \
     ant war
 
-FROM tomcat:9-jre11
+FROM tomcat:10.0.12-jre11-temurin
 
 LABEL maintainer="JGraph Ltd"
 
@@ -21,7 +21,8 @@ RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
         certbot \
         curl \
-        xmlstarlet && \
+        xmlstarlet \
+        unzip && \
     apt-get autoremove -y --purge && \
     apt-get clean && \
     rm -r /var/lib/apt/lists/*

@@ -1,5 +1,4 @@
-[![Build Status](https://github.com/jgraph/docker-drawio/workflows/Debian%20Docker%20Image%20CI/badge.svg)](https://github.com/jgraph/docker-drawio/actions)
-[![Build Status](https://github.com/jgraph/docker-drawio/workflows/Alpine%20Docker%20Image%20CI/badge.svg)](https://github.com/jgraph/docker-drawio/actions)
+[![Build Status](https://github.com/jgraph/docker-drawio/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/jgraph/docker-drawio/actions)
 [![Build Status](https://github.com/jgraph/docker-drawio/workflows/Docker%20image-export%20CI/badge.svg)](https://github.com/jgraph/docker-drawio/actions)
 
 
@@ -16,9 +15,9 @@
 
 ## Description
 
-The Dockerfile builds from `tomcat:9-jre11` and `tomcat:9-jre8-alpine` (see <https://hub.docker.com/_/tomcat/>)
+The Dockerfile builds from `tomcat:10.0.12-jre11-temurin` (see <https://hub.docker.com/_/tomcat/>)
 
-**Note: Version 16.0.0 changed from -slim to the standard Tomcat 9 and JRE 11 image, the major version number change indicating it's a breaking change.**
+**Note: Starting from version 16.5.3, alpine and debian images are no longer maintained. We changed to a single image that uses the tomcat image with the least security vulnerabilities. Currently, the image is based on Eclipse Temurin JRE and Ubuntu 20.04.3 LTS (Focal Fossa)**
 
 Forked from [fjudith/draw.io](https://github.com/fjudith/docker-draw.io)
 
@@ -70,31 +69,7 @@ Notice that mapping port 80 to container's port 80 allows certbot to work in sta
 
 ## Changing diagrams.net configuration
 
-### Method 1 (Build you custom image with setting pre-loaded)
-
-1. Edit PreConfig.js & PostConfig.js files (next to Dockerfile in debian or alpine folders)
-1. Build the docker image
-
-### Method 2 (Using existing running docker container)
-
-1. Edit PreConfig.js & PostConfig.js files (next to Dockerfile in debian or alpine folders)
-1. Copy these files to docker container 
-
-```
-docker cp PreConfig.js draw:/usr/local/tomcat/webapps/draw/js/
-docker cp PostConfig.js draw:/usr/local/tomcat/webapps/draw/js/
-```
-
-### Method 3 (Bind configuration files into the container when started)
-
-1. This method allows changing the configuration files directly on the host without invoking any other docker commands. It can be used for testing
-1. Edit PreConfig.js & PostConfig.js files (next to Dockerfile in debian or alpine folders)
-1. From within the directory that contained the configuration files, run the following command to start docker container
-1. Note: self-contained docker-compose file already mount the configuration files into the container
-
-```
-docker run -it  --rm --name="draw" --mount type=bind,source="$(pwd)"/PreConfig.js,target=/usr/local/tomcat/webapps/draw/js/PreConfig.js --mount type=bind,source="$(pwd)"/PostConfig.js,target=/usr/local/tomcat/webapps/draw/js/PostConfig.js -p 8080:8080 -p 8443:8443 jgraph/drawio
-```
+Configuration is managed by `DRAWIO_*` environment variables. For a list of these variables, check the `docker-entrypoint.sh` file in the `main` directory. For example, these variables allow enabling integration with Google Drive, OneDrive, ...
 
 ## Reference
 
