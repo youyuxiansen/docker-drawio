@@ -15,7 +15,7 @@
 
 ## Description
 
-The Dockerfile builds from `tomcat:10.1.0-M11-jdk11-openjdk-slim-bullseye` (see <https://hub.docker.com/_/tomcat/>)
+The Dockerfile builds from `tomcat:9-jre11-openjdk-slim` (see <https://hub.docker.com/_/tomcat/>)
 
 **Note: Starting from version 16.5.3, alpine and debian images are no longer maintained. We changed to a single image that uses the tomcat image with the least security vulnerabilities.**
 
