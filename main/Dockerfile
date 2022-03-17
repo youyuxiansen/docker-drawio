@@ -13,7 +13,7 @@ RUN cd /tmp && \
     cd /tmp/drawio/etc/build/ && \
     ant war
 
-FROM tomcat:10.0.12-jre11-temurin
+FROM tomcat:10.1.0-M11-jdk11-openjdk-slim-bullseye
 
 LABEL maintainer="JGraph Ltd"
 
