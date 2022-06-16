@@ -31,6 +31,8 @@ fi
 echo "window.DRAWIO_BASE_URL = '${DRAWIO_BASE_URL:-http://localhost:8080}';" >> $CATALINA_HOME/webapps/draw/js/PreConfig.js
 #DRAWIO_VIEWER_URL is path to the viewer js, e.g. https://www.example.com/js/viewer.min.js
 echo "window.DRAWIO_VIEWER_URL = '${DRAWIO_VIEWER_URL}';" >> $CATALINA_HOME/webapps/draw/js/PreConfig.js
+#DRAWIO_LIGHTBOX_URL Replace with your lightbox URL, eg. https://www.example.com
+echo "window.DRAWIO_LIGHTBOX_URL = '${DRAWIO_LIGHTBOX_URL}';" >> $CATALINA_HOME/webapps/draw/js/PreConfig.js
 echo "window.DRAW_MATH_URL = 'math';" >> $CATALINA_HOME/webapps/draw/js/PreConfig.js
 #Custom draw.io configurations. For more details, https://desk.draw.io/support/solutions/articles/16000058316
 echo "window.DRAWIO_CONFIG = ${DRAWIO_CONFIG:-null};" >> $CATALINA_HOME/webapps/draw/js/PreConfig.js
