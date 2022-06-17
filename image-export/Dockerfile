@@ -1,4 +1,4 @@
-FROM node:slim
+FROM node:18.3.0-buster-slim
 
 LABEL maintainer="JGraph Ltd"
 
